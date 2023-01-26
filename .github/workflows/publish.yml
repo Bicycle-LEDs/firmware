@@ -74,7 +74,7 @@ jobs:
           git config user.name github-actions
           git config user.email github-actions@github.com
           git add .
-          git commit -m "🏗️ Build ${{steps.version.outputs.content}}" || true
+          git commit -m "🏗️ Build v${{steps.version.outputs.content}}" || true
           git push || true
 
       # Publish release
@@ -83,7 +83,7 @@ jobs:
         uses: ncipollo/release-action@main
         with:
           tag: ${{ steps.version.outputs.content }}
-          name: Release ${{ steps.version.outputs.content }}
+          name: Release v${{ steps.version.outputs.content }}
           token: ${{ secrets.GITHUB_TOKEN }}
           bodyFile: release.md
           artifacts: ./updater/firmware.bin
