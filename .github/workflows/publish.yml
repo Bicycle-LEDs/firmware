@@ -53,11 +53,13 @@ jobs:
 
       - name: Remove old firmwares
         run: 
-          rm -rf ./updater/firmware.bin || true
+          mv ./updater/version.txt ./version.txt
+          rm -rf ./updater
+          mkdir updater
+          mv ./version.txt ./updater/version.txt
           mv ./sketch/build/*.*.*/*.ino.bin ./updater/firmware.bin
-          rm -rf ./sketch/build
-          rm -rf ./updater/version-check.txt || true
           cp ./updater/version.txt ./updater/version-check.txt
+          rm -rf ./sketch/build
 
       # Read version file
 
