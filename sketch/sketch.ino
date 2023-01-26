@@ -476,4 +476,3 @@ void loop() {
     if (previousButtonState == LOW) updateLEDPattern(0, 0, 1);  // Change animation to next
   }
 }
->>>>>>> Stashed changes
