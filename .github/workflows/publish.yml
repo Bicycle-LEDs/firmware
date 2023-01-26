@@ -56,7 +56,7 @@ jobs:
           rm -rf ./updater/firmware.bin || true
           rm -rf ./updater/version-check.txt || true
           cp ./sketch/build/*.*.*/*.ino.bin ./updater/firmware.bin
-          cp ./updater/version.txt ./updater/version-check.txt
+          cp ./sketch/version.txt ./updater/version-check.txt
           rm -rf ./sketch/build
 
       # Read version file
@@ -65,7 +65,7 @@ jobs:
         id: version
         uses: juliangruber/read-file-action@master
         with:
-          path: ./updater/version.txt
+          path: ./sketch/version.txt
 
       # Update repository
 
