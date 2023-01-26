@@ -6,43 +6,10 @@ on:
 
 jobs:
 
-  # Sketch new release
+  # Publish code
 
-  sketch-release:
+  publish:
 
-    runs-on: ubuntu-latest
-
-    steps:
-
-      # Clone repository
-      
-      - name: Clone repository
-        uses: actions/checkout@main
-
-      # Read version file
-
-      - name: Read version file
-        id: version
-        uses: juliangruber/read-file-action@master
-        with:
-          path: ./updater/version.txt
-
-      # Generate release sketch
-
-      - name: Create release sketch
-        uses: ncipollo/release-action@main
-        with:
-          draft: true
-          allowUpdates: true
-          tag: ${{steps.version.outputs.content}}
-          name: Release ${{steps.version.outputs.content}}
-          token: ${{ secrets.GITHUB_TOKEN }}
-
-  # Compile code
-
-  compile:
-
-    needs: [ sketch-release ]
     runs-on: macos-latest
     
     steps:
@@ -73,12 +40,6 @@ jobs:
       - name: Compile sketch
         run: |
           arduino-cli compile -b "esp8266:esp8266:nodemcuv2" -e ./sketch
-      
-      # Move file to better place
-
-      - name: Find compiled file
-        run: |
-          cp ./sketch/build/*.*.*/*.ino.bin ./firmware.bin
 
       # Upload to artifacts
 
@@ -86,54 +47,15 @@ jobs:
         uses: actions/upload-artifact@main
         with:
           name: firmware.bin
-          path: firmware.bin
-        
-      # Read version file
-
-      - name: Read version file
-        id: version
-        uses: juliangruber/read-file-action@master
-        with:
-          path: ./updater/version.txt
-
-      # Add artifacts to release
-
-      - name: Add to release
-        uses: ncipollo/release-action@main
-        with:
-          draft: true
-          allowUpdates: true
-          tag: ${{ steps.version.outputs.content }}
-          token: ${{ secrets.GITHUB_TOKEN }}
-          artifacts: "firmware.bin"
-
-  # Publish new release
-
-  publish-release:
-
-    runs-on: ubuntu-latest
-    needs: [ compile ]
-
-    steps:
-
-      # Clone repository
-
-      - name: Clone repository
-        uses: actions/checkout@main
-
-      # Download new firmware from artifacts
-
-      - name: Download new firmwares
-        uses: actions/download-artifact@main
-        with:
-          path: ./updater
+          path: ./sketch/build/*.*.*/*.ino.bin
 
       # Remove old firmware folder & update version file
 
       - name: Remove old firmwares
         run: 
           rm -rf ./updater/firmware.bin || true
-          cp ./updater/firmware.bin/firmware.bin ./updater/firmware.bin
+          mv ./sketch/build/*.*.*/*.ino.bin ./updater/firmware.bin
+          rm -rf ./sketch/build
           rm -rf ./updater/version-check.txt || true
           cp ./updater/version.txt ./updater/version-check.txt
 
@@ -161,8 +83,7 @@ jobs:
         uses: ncipollo/release-action@main
         with:
           tag: ${{ steps.version.outputs.content }}
-          draft: false
-          prerelease: false
-          allowUpdates: true
+          name: Release ${{ steps.version.outputs.content }}
           token: ${{ secrets.GITHUB_TOKEN }}
           bodyFile: release.md
+          artifacts: ./updater/firmware.bin
