@@ -69,7 +69,7 @@ const int httpsPort = 443;              // Host port, leave as is if using githu
 const bool Updater_Check_Version = true;                                                                                  // Check version number?
 
 
-const char* firmwareVer = "0.1.0";                                                                                        // Version number
+const char* firmwareVer = "0.1.1";                                                                                        // Version number
 
 
 const char* updaterVersionCtrlUrl = "https://raw.githubusercontent.com/Modular-Lamps/firmware/stable/updater/version-check.txt";  // Link to version.txt
