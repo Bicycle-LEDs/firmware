@@ -121,20 +121,21 @@ jobs:
       - name: Clone repository
         uses: actions/checkout@main
 
-      # Remove old firmware folder & update version file
-
-      - name: Remove old firmwares
-        run: 
-          rm -rf ./updater/firmware.bin || true
-          rm -rf ./updater/version-check.txt || true
-          cp ./updater/version.txt ./updater/version-check.txt
-
-      # Download new firmware from releases
+      # Download new firmware from artifacts
 
       - name: Download new firmwares
         uses: actions/download-artifact@main
         with:
           path: ./updater
+
+      # Remove old firmware folder & update version file
+
+      - name: Remove old firmwares
+        run: 
+          rm -rf ./updater/firmware.bin || true
+          cp ./updater/firmware.bin/firmware.bin ./updater/firmware.bin
+          rm -rf ./updater/version-check.txt || true
+          cp ./updater/version.txt ./updater/version-check.txt
 
       # Read version file
 
