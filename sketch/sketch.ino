@@ -72,12 +72,12 @@ const bool Updater_Check_Version = true;                                        
 const char* firmwareVer = "0.1.0";                                                                                        // Version number
 
 
-const char* updaterVersionCtrlUrl = "https://raw.githubusercontent.com/Modular-Lamps/firmware/main/updater/version-check.txt";  // Link to version.txt
+const char* updaterVersionCtrlUrl = "https://raw.githubusercontent.com/Modular-Lamps/firmware/stable/updater/version-check.txt";  // Link to version.txt
 
 const bool Updater_FS = false;                                                                                         // Update filesystem (NOT WORKING YET)?
-const String updaterFilesystemUrl = "https://raw.githubusercontent.com/Modular-Lamps/firmware/main/updater/fs-files";  // Files for filesystem update location, without '/' at the end.
+const String updaterFilesystemUrl = "https://raw.githubusercontent.com/Modular-Lamps/firmware/stable/updater/fs-files";  // Files for filesystem update location, without '/' at the end.
 
-const char* updaterFirmwareUrl = "https://raw.githubusercontent.com/Modular-Lamps/firmware/main/updater/firmware.bin";  // File to firmware.bin
+const char* updaterFirmwareUrl = "https://raw.githubusercontent.com/Modular-Lamps/firmware/stable/updater/firmware.bin";  // File to firmware.bin
 
 int updateStatus = 0;
 
