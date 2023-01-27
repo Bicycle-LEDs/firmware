@@ -11,11 +11,11 @@
 🛟 Change branch to channel you want and download for your board from firmware folder
 
 🧬Alternative links:
-- 🟢 [Latest stable](https://github.com/Modular-Lamps/firmware/releases/latest)
+- 🟢 [Latest stable](https://github.com/Bicycle-LEDs/firmware/releases/latest)
 
 ## 🛠️ If you are looking for something else:
-- 🎬 [Main site](https://modular-lamps.github.io/)
-- 🛠️ [Hardware testing files](https://github.com/Modular-Lamps/hardware-tests)
-- 🧬 [Electronics](https://github.com/Modular-Lamps/electronics)
+- 🎬 [Main site](https://bicycle-leds.github.io/)
+- 🛠️ [Hardware testing files](https://github.com/Bicycle-LEDs/hardware-tests)
+- 🧬 [Electronics](https://github.com/Bicycle-LEDs/electronics)
 
 ## ⚙️ Under active development
