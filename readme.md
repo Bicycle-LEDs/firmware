@@ -17,3 +17,5 @@
 - 🎬 [Main site](https://modular-lamps.github.io/)
 - 🛠️ [Hardware testing files](https://github.com/Modular-Lamps/hardware-tests)
 - 🧬 [Electronics](https://github.com/Modular-Lamps/electronics)
+
+## ⚙️ Under active development
