@@ -1,23 +1,4 @@
 //      <-- Libraries -->
-
-// Wifi and certificates
-#include <ESP8266WiFi.h>
-#include <WiFiClientSecure.h>
-#include <CertStoreBearSSL.h>
-BearSSL::CertStore certStore;
-// Time for certificate validation
-#include <time.h>
-
-//HTTP
-#include <ESP8266HTTPClient.h>
-
-// Updater
-#include <ESP8266httpUpdate.h>
-
-// Web server
-#include <ESPAsyncWebServer.h>
-#include <ESPAsyncTCP.h>
-
 // Filesystem
 #include <FS.h>
 
@@ -29,57 +10,19 @@ BearSSL::CertStore certStore;
 //                      <--- Settings --->
 
 // LEDs
-const bool Settings_LEDs = true;  // LEDs available?
-
-const int numStrips = 7;                           // Number of led strips
-const int numOfLEDs[] = { 7, 7, 7, 7, 7, 7, 7 };   // Number of leds on every strip
-const int LEDpin[] = { 0, 2, 14, 12, 13, 15, 3 };  // Pin for every led strip
+const int numStrips = 3;                           // Number of led strips
+const int numOfLEDs[] = { 7, 7, 7 };   // Number of leds on every strip
+const int LEDpin[] = { 0, 2, 14 };  // Pin for every led strip
 Adafruit_NeoPixel LEDstrip[] = {
   Adafruit_NeoPixel(numOfLEDs[0], LEDpin[0], NEO_GRB + NEO_KHZ800),  // Create strip objects
   Adafruit_NeoPixel(numOfLEDs[1], LEDpin[1], NEO_GRB + NEO_KHZ800),
   Adafruit_NeoPixel(numOfLEDs[2], LEDpin[2], NEO_GRB + NEO_KHZ800),
-  Adafruit_NeoPixel(numOfLEDs[3], LEDpin[3], NEO_GRB + NEO_KHZ800),
-  Adafruit_NeoPixel(numOfLEDs[4], LEDpin[4], NEO_GRB + NEO_KHZ800),
-  Adafruit_NeoPixel(numOfLEDs[5], LEDpin[5], NEO_GRB + NEO_KHZ800),
-  Adafruit_NeoPixel(numOfLEDs[6], LEDpin[6], NEO_GRB + NEO_KHZ800),
 };                               // Delete lines if using less or add lines but with other numOfLEDs and LEDPin if using more led strips
 const int numberOfPatterns = 1;  // Number of available patterns
 int setPatternNum = 0;           // Startup pattern number
 
 // Button
 const int buttonPin = 1;  // Button Pin
-
-
-// WiFi
-const bool Settings_ActivateWiFi = true;  // Activate wireless functions?
-
-const bool WiFi_UpdateCredentialsFile = false;  // Update network_config.txt in filesystem?
-const char* ssid = "";                          // Network name
-const char* password = "";                      // Network password
-
-String ssidFromFile, passwordFromFile;
-
-// Updater
-const bool Settings_Updater = true;  // Activate updater?
-
-const long updateInterval = 1 * 60000;  // Interval for auto updates checking
-const char* host = "github.com";        // Host to check connection, leave as is if using github
-const int httpsPort = 443;              // Host port, leave as is if using github
-
-const bool Updater_Check_Version = true;                                                                                  // Check version number?
-
-
-const char* firmwareVer = "0.1.1";                                                                                        // Version number
-
-
-const char* updaterVersionCtrlUrl = "https://raw.githubusercontent.com/Modular-Lamps/firmware/stable/updater/version-check.txt";  // Link to version.txt
-
-const bool Updater_FS = false;                                                                                         // Update filesystem (NOT WORKING YET)?
-const String updaterFilesystemUrl = "https://raw.githubusercontent.com/Modular-Lamps/firmware/stable/updater/fs-files";  // Files for filesystem update location, without '/' at the end.
-
-const char* updaterFirmwareUrl = "https://raw.githubusercontent.com/Modular-Lamps/firmware/stable/updater/firmware.bin";  // File to firmware.bin
-
-int updateStatus = 0;
 
 
 //                      <--- LEDs engine --->
